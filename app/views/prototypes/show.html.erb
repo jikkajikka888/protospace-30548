@@ -5,7 +5,7 @@
         <%= @prototype.title %>
       </p>
       <%= link_to "by #{@prototype.user.name}", user_path(@prototype.user), class: :prototype__user %>
-      <% if user_signed_in? == @prototype.user_id %>
+      <% if user_signed_in? && @prototype.user_id %>
         <div class="prototype__manage">
           <%= link_to "編集する", edit_prototype_path, class: :prototype__btn %>
           <%= link_to "削除する", prototype_path, method: :delete, class: :prototype__btn %>
@@ -41,8 +41,8 @@
           <% end %> 
         <% end %>
         <ul class="comments_lists">
+          <% @comments.each do |comment| %>
             <li class="comments_list">
-              <% @comments.each do |comment| %>
                 <%= comment.text %>
                 <%= link_to "#{comment.user.name}", user_path(comment.user) , class: :comment_user %>
               <% end %>
